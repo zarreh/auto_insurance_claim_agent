@@ -26,7 +26,7 @@ COPY --from=builder /app/.venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Copy project metadata (needed for pip install -e .)
-COPY pyproject.toml ./
+COPY pyproject.toml README.md ./
 
 # Copy application code
 COPY src/ src/

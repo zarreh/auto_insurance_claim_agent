@@ -14,7 +14,9 @@ notebook
 tests
 dist
 build
-*.md
+!README.md
+PLANNING_PROMPT.md
+plan-claimProcessAgent.prompt.md
 Makefile
 docker-compose.yml
 frontend/Dockerfile
