@@ -44,10 +44,10 @@ from claim_agent.pipelines.langchain_pipeline.tools import (
 from claim_agent.schemas.claim import ClaimDecision, ClaimInfo
 from claim_agent.schemas.policy import PolicyQueries, PolicyRecommendation
 
-
 # ---------------------------------------------------------------------------
 # State schema
 # ---------------------------------------------------------------------------
+
 
 class ClaimState(TypedDict, total=False):
     """Mutable state carried through the LangGraph execution."""
@@ -84,6 +84,7 @@ class ClaimState(TypedDict, total=False):
 # ---------------------------------------------------------------------------
 # Node functions
 # ---------------------------------------------------------------------------
+
 
 def _log_node(name: str) -> dict[str, Any]:
     """Return a trace entry dict and log entry into a node."""
@@ -131,7 +132,8 @@ def node_price_check(state: ClaimState, cfg: DictConfig) -> dict:
     t = _log_node("price_check")
     threshold = cfg.pipeline.price_check.inflation_threshold
     market_est, is_inflated, info = web_search_repair_cost(
-        state["claim"], inflation_threshold=threshold,
+        state["claim"],
+        inflation_threshold=threshold,
     )
     t["market_estimate"] = market_est
     t["is_inflated"] = is_inflated
@@ -176,7 +178,11 @@ def node_finalize_decision(state: ClaimState) -> dict:
     t["elapsed"] = time.time() - t["entered_at"]
     trace = state.get("trace", [])
     trace.append(t)
-    logger.info("✓ Claim {num} APPROVED — payout ${pay:,.2f}", num=claim.claim_number, pay=decision.recommended_payout)
+    logger.info(
+        "✓ Claim {num} APPROVED — payout ${pay:,.2f}",
+        num=claim.claim_number,
+        pay=decision.recommended_payout,
+    )
     return {"decision": decision, "trace": trace}
 
 
@@ -193,7 +199,11 @@ def node_finalize_invalid(state: ClaimState) -> dict:
     t["elapsed"] = time.time() - t["entered_at"]
     trace = state.get("trace", [])
     trace.append(t)
-    logger.info("✗ Claim {num} REJECTED — {reason}", num=claim.claim_number, reason=state["validation_reason"])
+    logger.info(
+        "✗ Claim {num} REJECTED — {reason}",
+        num=claim.claim_number,
+        reason=state["validation_reason"],
+    )
     return {"decision": decision, "trace": trace}
 
 
@@ -221,6 +231,7 @@ def node_finalize_inflated(state: ClaimState) -> dict:
 # Conditional edge routers
 # ---------------------------------------------------------------------------
 
+
 def route_after_validate(state: ClaimState) -> str:
     """Route to ``check_policy`` if valid, else ``finalize_invalid``."""
     return "check_policy" if state.get("is_valid") else "finalize_invalid"
@@ -234,6 +245,7 @@ def route_after_price_check(state: ClaimState) -> str:
 # ---------------------------------------------------------------------------
 # Graph builder
 # ---------------------------------------------------------------------------
+
 
 def build_claim_graph(cfg: DictConfig, llm: ChatOpenAI) -> StateGraph:
     """Construct and compile the LangGraph ``StateGraph``.
@@ -278,7 +290,10 @@ def build_claim_graph(cfg: DictConfig, llm: ChatOpenAI) -> StateGraph:
     graph.add_conditional_edges(
         "price_check",
         route_after_price_check,
-        {"generate_recommendation": "generate_recommendation", "finalize_inflated": "finalize_inflated"},
+        {
+            "generate_recommendation": "generate_recommendation",
+            "finalize_inflated": "finalize_inflated",
+        },
     )
 
     graph.add_edge("generate_recommendation", "finalize_decision")

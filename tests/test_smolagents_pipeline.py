@@ -17,6 +17,7 @@ from claim_agent.schemas.claim import ClaimDecision, ClaimInfo
 # _parse_decision / _extract_json / _fuzzy_extract  (unit tests)
 # ═══════════════════════════════════════════════════════════════════════
 
+
 class TestSmolAgentsParseDecision:
     """Test the parsing helpers on :class:`SmolAgentsPipeline`."""
 
@@ -55,13 +56,15 @@ class TestSmolAgentsParseDecision:
         assert data["claim_number"] == self.claim.claim_number
 
     def test_parse_decision_valid_json(self, test_cfg: DictConfig) -> None:
-        decision_json = json.dumps({
-            "claim_number": "CLM-TEST-001",
-            "covered": True,
-            "deductible": 500.0,
-            "recommended_payout": 3000.0,
-            "notes": "Approved.",
-        })
+        decision_json = json.dumps(
+            {
+                "claim_number": "CLM-TEST-001",
+                "covered": True,
+                "deductible": 500.0,
+                "recommended_payout": 3000.0,
+                "notes": "Approved.",
+            }
+        )
 
         with patch.object(self.Pipeline, "__init__", lambda s, c: None):
             pipeline = self.Pipeline.__new__(self.Pipeline)
@@ -71,14 +74,10 @@ class TestSmolAgentsParseDecision:
         assert decision.covered is True
         assert decision.recommended_payout == 3000.0
 
-    def test_parse_decision_unparseable_returns_fallback(
-        self, test_cfg: DictConfig
-    ) -> None:
+    def test_parse_decision_unparseable_returns_fallback(self, test_cfg: DictConfig) -> None:
         with patch.object(self.Pipeline, "__init__", lambda s, c: None):
             pipeline = self.Pipeline.__new__(self.Pipeline)
-            decision = pipeline._parse_decision(
-                "completely invalid output", self.claim
-            )
+            decision = pipeline._parse_decision("completely invalid output", self.claim)
 
         assert isinstance(decision, ClaimDecision)
         assert decision.covered is False
@@ -89,6 +88,7 @@ class TestSmolAgentsParseDecision:
 # ═══════════════════════════════════════════════════════════════════════
 # End-to-end pipeline with mocked agent
 # ═══════════════════════════════════════════════════════════════════════
+
 
 class TestSmolAgentsPipelineE2E:
     """End-to-end test with a mocked ToolCallingAgent."""
@@ -105,13 +105,15 @@ class TestSmolAgentsPipelineE2E:
         """Pipeline should return a valid ClaimDecision from mocked agent output."""
         # Configure the mock agent to return valid JSON
         mock_agent = MagicMock()
-        mock_agent.run.return_value = json.dumps({
-            "claim_number": valid_claim.claim_number,
-            "covered": True,
-            "deductible": 500.0,
-            "recommended_payout": 3000.0,
-            "notes": "Mock: Approved under collision.",
-        })
+        mock_agent.run.return_value = json.dumps(
+            {
+                "claim_number": valid_claim.claim_number,
+                "covered": True,
+                "deductible": 500.0,
+                "recommended_payout": 3000.0,
+                "notes": "Mock: Approved under collision.",
+            }
+        )
         mock_agent_cls.return_value = mock_agent
 
         # Adjust config for smolagents

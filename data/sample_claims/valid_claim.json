@@ -1,0 +1,9 @@
+{
+  "claim_number": "CLM-2025-001",
+  "policy_number": "PN-2",
+  "claimant_name": "John Smith",
+  "date_of_loss": "2025-03-15",
+  "loss_description": "Rear-end collision at intersection. Other driver ran a red light and struck the insured vehicle from behind, causing damage to the rear bumper, trunk lid, and tail lights.",
+  "estimated_repair_cost": 4500.00,
+  "vehicle_details": "2022 Toyota Camry SE, VIN: 4T1BF1FK5CU123456, Silver"
+}

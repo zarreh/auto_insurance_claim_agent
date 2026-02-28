@@ -105,6 +105,7 @@ class ClaimAPIClient:
 # Custom exception
 # ---------------------------------------------------------------------------
 
+
 class APIError(Exception):
     """Raised when the backend returns an error or is unreachable."""
 
@@ -116,6 +117,7 @@ class APIError(Exception):
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _safe_json(resp: requests.Response) -> dict[str, Any]:
     """Try to parse a response body as JSON, returning ``{}`` on failure."""

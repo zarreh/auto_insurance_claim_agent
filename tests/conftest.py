@@ -17,6 +17,7 @@ from claim_agent.schemas.claim import ClaimDecision, ClaimInfo
 # ClaimInfo fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def valid_claim() -> ClaimInfo:
     """A valid claim that should pass all validation checks (PN-2: active, no dues)."""
@@ -88,6 +89,7 @@ def inflated_cost_claim() -> ClaimInfo:
 # Mock CSV data fixture
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def coverage_csv(tmp_path: Path) -> str:
     """Write a small coverage CSV and return its path."""
@@ -108,6 +110,7 @@ def coverage_csv(tmp_path: Path) -> str:
 # ---------------------------------------------------------------------------
 # Hydra config fixture (test overrides)
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture()
 def test_cfg(tmp_path: Path, coverage_csv: str) -> Any:
@@ -158,6 +161,7 @@ def test_cfg(tmp_path: Path, coverage_csv: str) -> Any:
 # Sample ClaimDecision
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def sample_decision() -> ClaimDecision:
     """A pre-built ClaimDecision for route tests."""
@@ -173,6 +177,7 @@ def sample_decision() -> ClaimDecision:
 # ---------------------------------------------------------------------------
 # Mock pipeline
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture()
 def mock_pipeline(sample_decision: ClaimDecision) -> MagicMock:

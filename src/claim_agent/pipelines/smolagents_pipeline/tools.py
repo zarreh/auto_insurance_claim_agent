@@ -17,6 +17,7 @@ from smolagents import tool
 # Tool: parse and validate claim
 # ---------------------------------------------------------------------------
 
+
 @tool
 def parse_and_validate_claim(
     claim_json: str,
@@ -51,6 +52,7 @@ def parse_and_validate_claim(
 # ---------------------------------------------------------------------------
 # Tool: generate policy search queries via LLM
 # ---------------------------------------------------------------------------
+
 
 @tool
 def generate_policy_queries(
@@ -98,6 +100,7 @@ def generate_policy_queries(
 # Tool: retrieve policy text from ChromaDB
 # ---------------------------------------------------------------------------
 
+
 @tool
 def retrieve_policy_text(
     queries_json: str,
@@ -138,6 +141,7 @@ def retrieve_policy_text(
 # Tool: estimate repair cost via web search
 # ---------------------------------------------------------------------------
 
+
 @tool
 def estimate_repair_cost(
     claim_json: str,
@@ -162,10 +166,7 @@ def estimate_repair_cost(
     from claim_agent.schemas.claim import ClaimInfo
 
     claim = ClaimInfo(**_json.loads(claim_json))
-    query = (
-        f"average auto repair cost {claim.loss_description} "
-        f"{claim.vehicle_details or ''} USD"
-    )
+    query = f"average auto repair cost {claim.loss_description} {claim.vehicle_details or ''} USD"
 
     try:
         with DDGS() as ddgs:
@@ -188,9 +189,7 @@ def estimate_repair_cost(
             }
         )
 
-    snippets = "\n".join(
-        f"- {r.get('title', '')}: {r.get('body', '')}" for r in results
-    )
+    snippets = "\n".join(f"- {r.get('title', '')}: {r.get('body', '')}" for r in results)
 
     # Extract dollar amounts
     pattern = r"\$\s?([\d,]+(?:\.\d{1,2})?)"
@@ -241,6 +240,7 @@ def estimate_repair_cost(
 # ---------------------------------------------------------------------------
 # Tool: generate coverage recommendation via LLM
 # ---------------------------------------------------------------------------
+
 
 @tool
 def generate_recommendation(

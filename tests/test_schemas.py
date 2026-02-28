@@ -14,6 +14,7 @@ from claim_agent.schemas.policy import PolicyQueries, PolicyRecommendation
 # ClaimInfo
 # ═══════════════════════════════════════════════════════════════════════
 
+
 class TestClaimInfo:
     """Test suite for :class:`ClaimInfo`."""
 
@@ -94,6 +95,7 @@ class TestClaimInfo:
 # ClaimDecision
 # ═══════════════════════════════════════════════════════════════════════
 
+
 class TestClaimDecision:
     """Test suite for :class:`ClaimDecision`."""
 
@@ -134,6 +136,7 @@ class TestClaimDecision:
 # PolicyQueries
 # ═══════════════════════════════════════════════════════════════════════
 
+
 class TestPolicyQueries:
     """Test suite for :class:`PolicyQueries`."""
 
@@ -153,6 +156,7 @@ class TestPolicyQueries:
 # ═══════════════════════════════════════════════════════════════════════
 # PolicyRecommendation
 # ═══════════════════════════════════════════════════════════════════════
+
 
 class TestPolicyRecommendation:
     """Test suite for :class:`PolicyRecommendation`."""

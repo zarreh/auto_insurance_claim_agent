@@ -109,6 +109,7 @@ deductible, recommended_payout, notes.
 # Assembled PromptTemplates object
 # ---------------------------------------------------------------------------
 
+
 def get_prompt_templates() -> PromptTemplates:
     """Return the configured ``PromptTemplates`` for the claim-processing agent."""
     return PromptTemplates(

@@ -77,6 +77,7 @@ def render_claim_form() -> dict | None:
 # Structured form
 # ---------------------------------------------------------------------------
 
+
 def _structured_form() -> dict | None:
     col1, col2 = st.columns(2)
 
@@ -145,6 +146,7 @@ def _structured_form() -> dict | None:
 # ---------------------------------------------------------------------------
 # JSON editor / file upload
 # ---------------------------------------------------------------------------
+
 
 def _json_editor() -> dict | None:
     st.markdown("Paste claim JSON below or upload a `.json` file.")

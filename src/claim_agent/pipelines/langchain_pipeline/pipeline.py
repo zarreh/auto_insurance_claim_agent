@@ -98,6 +98,7 @@ class LangChainPipeline(BasePipeline):
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _format_trace(trace: list[dict[str, Any]]) -> str:
     """Format the execution trace into a readable string."""
     lines: list[str] = []

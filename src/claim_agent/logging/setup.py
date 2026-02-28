@@ -16,6 +16,7 @@ if TYPE_CHECKING:
 # Intercept stdlib logging → loguru
 # ---------------------------------------------------------------------------
 
+
 class _InterceptHandler(logging.Handler):
     """Route standard-library log records through loguru."""
 

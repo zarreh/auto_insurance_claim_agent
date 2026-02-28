@@ -51,6 +51,7 @@ def chroma_dir(tmp_path: Path) -> str:
 # Tests
 # ---------------------------------------------------------------------------
 
+
 class TestRetrieval:
     """Test suite for :func:`retrieve_policy_text`."""
 

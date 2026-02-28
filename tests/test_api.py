@@ -20,6 +20,7 @@ from claim_agent.schemas.claim import ClaimInfo
 # App fixture (bypass heavy lifespan)
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def app(test_cfg: DictConfig, mock_pipeline: MagicMock) -> FastAPI:
     """Build a FastAPI app with the pipeline mocked out."""
@@ -42,6 +43,7 @@ async def client(app: FastAPI) -> AsyncClient:
 # ═══════════════════════════════════════════════════════════════════════
 # Tests
 # ═══════════════════════════════════════════════════════════════════════
+
 
 class TestHealthEndpoint:
     @pytest.mark.asyncio

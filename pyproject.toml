@@ -49,6 +49,13 @@ ruff = "*"
 mypy = "*"
 pre-commit = "*"
 
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "^9.7.3"
+mkdocs = "^1.6.1"
+mkdocs-mermaid2-plugin = "^1.2.3"
+pymdown-extensions = "^10.21"
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"

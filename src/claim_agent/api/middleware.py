@@ -14,6 +14,7 @@ from starlette.responses import JSONResponse, Response
 # Request logging
 # ---------------------------------------------------------------------------
 
+
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
     """Log every request with method, path, status code, and duration."""
 
@@ -42,6 +43,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
 # ---------------------------------------------------------------------------
 # Exception handler
 # ---------------------------------------------------------------------------
+
 
 class ExceptionHandlerMiddleware(BaseHTTPMiddleware):
     """Catch unhandled exceptions and return a structured 500 response."""

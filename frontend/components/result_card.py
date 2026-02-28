@@ -47,8 +47,8 @@ def render_result_card(decision: dict[str, Any]) -> None:
             f"""
             <div class="metric-card">
                 <div class="label">Coverage</div>
-                <div class="value" style="color: {'#27ae60' if covered else '#c0392b'}">
-                    {'Covered' if covered else 'Not Covered'}
+                <div class="value" style="color: {"#27ae60" if covered else "#c0392b"}">
+                    {"Covered" if covered else "Not Covered"}
                 </div>
             </div>
             """,

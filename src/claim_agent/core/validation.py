@@ -58,8 +58,7 @@ def validate_claim(claim: ClaimInfo, csv_path: str) -> tuple[bool, str]:
     dues_remaining = str(record["premium_dues_remaining"]).strip().lower() == "true"
     if dues_remaining:
         msg = (
-            f"Policy {claim.policy_number} has outstanding premium dues — "
-            "claim cannot be processed"
+            f"Policy {claim.policy_number} has outstanding premium dues — claim cannot be processed"
         )
         logger.warning(msg, claim_number=claim.claim_number)
         return False, msg
@@ -88,6 +87,7 @@ def validate_claim(claim: ClaimInfo, csv_path: str) -> tuple[bool, str]:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _parse_date(value: str | date) -> date:
     """Coerce a string or date value to ``datetime.date``."""

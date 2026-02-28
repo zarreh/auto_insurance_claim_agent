@@ -1,4 +1,4 @@
-.PHONY: install run-api run-frontend run docker-build docker-up docker-down test lint format clean ingest
+.PHONY: install run-api run-frontend run docker-build docker-up docker-down test lint format clean ingest docs-serve docs-build
 
 # ─── Dependencies ───────────────────────────────────────────────────────────────
 
@@ -45,6 +45,14 @@ lint:
 format:
 	poetry run ruff format src/ tests/ frontend/
 	poetry run ruff check --fix src/ tests/ frontend/
+
+# ─── Documentation ──────────────────────────────────────────────────────────────
+
+docs-serve:
+	poetry run mkdocs serve
+
+docs-build:
+	poetry run mkdocs build --strict
 
 # ─── Cleanup ────────────────────────────────────────────────────────────────────
 

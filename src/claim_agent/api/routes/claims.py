@@ -32,6 +32,7 @@ _PIPELINE_TYPES = ["langchain", "smolagents"]
 # POST /claims/process
 # ---------------------------------------------------------------------------
 
+
 @router.post(
     "/claims/process",
     response_model=ClaimDecision,
@@ -81,6 +82,7 @@ async def process_claim(claim: ClaimInfo, request: Request) -> ClaimDecision:
 # GET /health
 # ---------------------------------------------------------------------------
 
+
 @router.get(
     "/health",
     summary="Health check",
@@ -95,6 +97,7 @@ async def health(request: Request) -> dict:
 # ---------------------------------------------------------------------------
 # GET /pipelines
 # ---------------------------------------------------------------------------
+
 
 @router.get(
     "/pipelines",

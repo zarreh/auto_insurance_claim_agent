@@ -27,6 +27,7 @@ from claim_agent.schemas.policy import PolicyQueries, PolicyRecommendation
 # Unit-level node tests
 # ═══════════════════════════════════════════════════════════════════════
 
+
 class TestNodeFunctions:
     """Test individual graph node functions."""
 
@@ -83,6 +84,7 @@ class TestNodeFunctions:
 # Conditional edge routers
 # ═══════════════════════════════════════════════════════════════════════
 
+
 class TestRouters:
     """Test routing logic for conditional edges."""
 
@@ -102,6 +104,7 @@ class TestRouters:
 # ═══════════════════════════════════════════════════════════════════════
 # End-to-end graph execution (mocked LLM / tools)
 # ═══════════════════════════════════════════════════════════════════════
+
 
 class TestLangChainPipelineE2E:
     """End-to-end graph test with mocked external calls."""

@@ -14,10 +14,10 @@ from loguru import logger
 from PyPDF2 import PdfReader
 from sentence_transformers import SentenceTransformer
 
-
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 def ingest_policy_pdf(
     pdf_path: str,
@@ -77,7 +77,12 @@ def ingest_policy_pdf(
 
     # ── Chunk the text ──────────────────────────────────────────────────
     chunks = _chunk_text(raw_text, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    logger.info("Created {n} chunks (size={sz}, overlap={ov})", n=len(chunks), sz=chunk_size, ov=chunk_overlap)
+    logger.info(
+        "Created {n} chunks (size={sz}, overlap={ov})",
+        n=len(chunks),
+        sz=chunk_size,
+        ov=chunk_overlap,
+    )
 
     # ── Embed chunks ────────────────────────────────────────────────────
     logger.info("Loading embedding model: {model}", model=embedding_model)
@@ -106,6 +111,7 @@ def ingest_policy_pdf(
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _extract_pdf_text(pdf_path: Path) -> str:
     """Read all pages from a PDF and return concatenated text."""
@@ -171,6 +177,7 @@ def _chunk_id(index: int, text: str) -> str:
 # ---------------------------------------------------------------------------
 # CLI entry point (``python -m claim_agent.core.ingestion``)
 # ---------------------------------------------------------------------------
+
 
 def _cli() -> None:
     """Standalone ingestion script — reads Hydra config and ingests the PDF."""

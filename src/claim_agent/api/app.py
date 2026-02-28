@@ -33,6 +33,7 @@ if TYPE_CHECKING:
 # Lifespan
 # ---------------------------------------------------------------------------
 
+
 @asynccontextmanager
 async def _lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Startup / shutdown lifecycle for the FastAPI application."""
@@ -63,6 +64,7 @@ async def _lifespan(app: FastAPI) -> AsyncIterator[None]:
 # ---------------------------------------------------------------------------
 # Factory
 # ---------------------------------------------------------------------------
+
 
 def create_app(cfg: DictConfig) -> FastAPI:
     """Build and return a fully configured :class:`FastAPI` application.

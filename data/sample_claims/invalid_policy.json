@@ -1,0 +1,9 @@
+{
+  "claim_number": "CLM-2025-002",
+  "policy_number": "PN-99",
+  "claimant_name": "Jane Doe",
+  "date_of_loss": "2025-02-20",
+  "loss_description": "Side-swipe collision on highway. Adjacent vehicle drifted into lane and scraped the driver-side doors.",
+  "estimated_repair_cost": 3200.00,
+  "vehicle_details": "2023 Honda Civic EX, VIN: 2HGFC2F59PH567890, Blue"
+}

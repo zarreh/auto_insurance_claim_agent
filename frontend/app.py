@@ -121,9 +121,7 @@ if claim_data is not None:
 
     if result is not None:
         # Store in history
-        st.session_state.history.append(
-            {"claim": claim_data, "decision": result}
-        )
+        st.session_state.history.append({"claim": claim_data, "decision": result})
 
         st.divider()
         st.markdown("### Decision")

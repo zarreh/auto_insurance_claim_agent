@@ -8,7 +8,6 @@ nodes — but they follow the same thin-wrapper pattern.
 
 from __future__ import annotations
 
-import json
 import re
 from typing import TYPE_CHECKING
 
@@ -22,7 +21,7 @@ from claim_agent.pipelines.langchain_pipeline.prompts import (
     QUERY_GENERATION_PROMPT,
     RECOMMENDATION_PROMPT,
 )
-from claim_agent.schemas.claim import ClaimDecision, ClaimInfo
+from claim_agent.schemas.claim import ClaimInfo
 from claim_agent.schemas.policy import PolicyQueries, PolicyRecommendation
 
 if TYPE_CHECKING:
@@ -32,6 +31,7 @@ if TYPE_CHECKING:
 # ---------------------------------------------------------------------------
 # Tool: parse claim
 # ---------------------------------------------------------------------------
+
 
 def parse_claim(claim_data: dict) -> ClaimInfo:
     """Validate raw dict/JSON against the ``ClaimInfo`` schema.
@@ -47,6 +47,7 @@ def parse_claim(claim_data: dict) -> ClaimInfo:
 # Tool: validate claim against CSV
 # ---------------------------------------------------------------------------
 
+
 def validate_claim_tool(claim: ClaimInfo, csv_path: str) -> tuple[bool, str]:
     """Delegate to ``core.validation.validate_claim``."""
     is_valid, reason = validate_claim(claim, csv_path)
@@ -56,6 +57,7 @@ def validate_claim_tool(claim: ClaimInfo, csv_path: str) -> tuple[bool, str]:
 # ---------------------------------------------------------------------------
 # Tool: generate policy search queries via LLM
 # ---------------------------------------------------------------------------
+
 
 def generate_policy_queries(claim: ClaimInfo, llm: ChatOpenAI) -> PolicyQueries:
     """Ask the LLM to produce 3–5 targeted policy search queries."""
@@ -82,6 +84,7 @@ def generate_policy_queries(claim: ClaimInfo, llm: ChatOpenAI) -> PolicyQueries:
 # Tool: retrieve policy text from ChromaDB
 # ---------------------------------------------------------------------------
 
+
 def retrieve_policy_text_tool(
     queries: list[str],
     cfg: DictConfig,
@@ -101,6 +104,7 @@ def retrieve_policy_text_tool(
 # Tool: web-search repair cost estimate
 # ---------------------------------------------------------------------------
 
+
 def web_search_repair_cost(
     claim: ClaimInfo,
     inflation_threshold: float = 0.40,
@@ -112,10 +116,7 @@ def web_search_repair_cost(
     tuple[float | None, bool, str]
         ``(market_estimate, is_inflated, summary_text)``
     """
-    query = (
-        f"average auto repair cost {claim.loss_description} "
-        f"{claim.vehicle_details or ''} USD"
-    )
+    query = f"average auto repair cost {claim.loss_description} {claim.vehicle_details or ''} USD"
     logger.info("Web-searching repair costs: {q}", q=query)
 
     try:
@@ -129,16 +130,13 @@ def web_search_repair_cost(
         return None, False, "No web search results found. Price check skipped."
 
     # Combine snippet text for the LLM / heuristic
-    snippets = "\n".join(
-        f"- {r.get('title', '')}: {r.get('body', '')}" for r in results
-    )
+    snippets = "\n".join(f"- {r.get('title', '')}: {r.get('body', '')}" for r in results)
 
     # Try to extract dollar amounts from snippets
     amounts = _extract_dollar_amounts(snippets)
     if not amounts:
         summary = (
-            f"Web search returned results but no clear dollar estimates.\n"
-            f"Snippets:\n{snippets}"
+            f"Web search returned results but no clear dollar estimates.\nSnippets:\n{snippets}"
         )
         return None, False, summary
 
@@ -152,7 +150,11 @@ def web_search_repair_cost(
         f"Claimed: ${claim.estimated_repair_cost:,.2f}. "
         f"Threshold ({int(inflation_threshold * 100)}% above market): "
         f"${threshold_amount:,.2f}. "
-        f"{'INFLATED — claimed cost exceeds threshold.' if is_inflated else 'Within acceptable range.'}"
+        f"{
+            'INFLATED — claimed cost exceeds threshold.'
+            if is_inflated
+            else 'Within acceptable range.'
+        }"
     )
     logger.info(summary)
     return market_estimate, is_inflated, summary
@@ -161,6 +163,7 @@ def web_search_repair_cost(
 # ---------------------------------------------------------------------------
 # Tool: generate recommendation via LLM
 # ---------------------------------------------------------------------------
+
 
 def generate_recommendation(
     claim: ClaimInfo,
@@ -193,6 +196,7 @@ def generate_recommendation(
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _extract_dollar_amounts(text: str) -> list[float]:
     """Extract dollar amounts from free text (e.g. ``$1,234.56``)."""

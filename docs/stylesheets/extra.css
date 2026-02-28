@@ -1,0 +1,62 @@
+:root {
+  --md-admonition-icon--portfolio: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>');
+}
+
+/* Badge styling */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.375rem;
+  margin-right: 0.25em;
+}
+
+.badge-python {
+  background-color: #3776ab;
+  color: white;
+}
+
+.badge-fastapi {
+  background-color: #009688;
+  color: white;
+}
+
+.badge-langchain {
+  background-color: #1c3c3c;
+  color: white;
+}
+
+/* Tech stack grid on home page */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.tech-card {
+  padding: 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+.tech-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tech-card h4 {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.tech-card p {
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--md-default-fg-color--light);
+}

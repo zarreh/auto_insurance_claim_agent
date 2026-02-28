@@ -23,6 +23,7 @@ _TEXT_MUTED = "#7f8c8d"
 # Global CSS injection
 # ---------------------------------------------------------------------------
 
+
 def _build_css() -> str:
     """Build CSS with colour variables injected."""
     return f"""

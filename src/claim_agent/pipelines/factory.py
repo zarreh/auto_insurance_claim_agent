@@ -46,6 +46,5 @@ def create_pipeline(cfg: DictConfig) -> BasePipeline:
         return SmolAgentsPipeline(cfg)
 
     raise ValueError(
-        f"Unknown pipeline type '{pipeline_type}'. "
-        "Expected 'langchain' or 'smolagents'."
+        f"Unknown pipeline type '{pipeline_type}'. Expected 'langchain' or 'smolagents'."
     )

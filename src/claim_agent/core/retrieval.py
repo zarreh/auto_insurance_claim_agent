@@ -38,7 +38,9 @@ def retrieve_policy_text(
     """
     persist_dir = Path(chroma_persist_dir)
     if not persist_dir.exists():
-        msg = f"ChromaDB persist directory not found: {chroma_persist_dir}. Run 'make ingest' first."
+        msg = (
+            f"ChromaDB persist directory not found: {chroma_persist_dir}. Run 'make ingest' first."
+        )
         logger.error(msg)
         raise FileNotFoundError(msg)
 
@@ -56,7 +58,9 @@ def retrieve_policy_text(
 
     doc_count = collection.count()
     if doc_count == 0:
-        logger.warning("Collection '{name}' is empty — no policy text available", name=collection_name)
+        logger.warning(
+            "Collection '{name}' is empty — no policy text available", name=collection_name
+        )
         return []
 
     logger.info(

@@ -13,9 +13,7 @@ class TestValidation:
 
     # ── 1. Policy not found ─────────────────────────────────────────────
 
-    def test_policy_not_found(
-        self, invalid_policy_claim: ClaimInfo, coverage_csv: str
-    ) -> None:
+    def test_policy_not_found(self, invalid_policy_claim: ClaimInfo, coverage_csv: str) -> None:
         is_valid, reason = validate_claim(invalid_policy_claim, coverage_csv)
         assert is_valid is False
         assert "PN-99" in reason
@@ -23,27 +21,21 @@ class TestValidation:
 
     # ── 2. Outstanding premium dues ─────────────────────────────────────
 
-    def test_outstanding_dues(
-        self, dues_remaining_claim: ClaimInfo, coverage_csv: str
-    ) -> None:
+    def test_outstanding_dues(self, dues_remaining_claim: ClaimInfo, coverage_csv: str) -> None:
         is_valid, reason = validate_claim(dues_remaining_claim, coverage_csv)
         assert is_valid is False
         assert "outstanding" in reason.lower() or "dues" in reason.lower()
 
     # ── 3. Expired coverage ─────────────────────────────────────────────
 
-    def test_expired_coverage(
-        self, expired_policy_claim: ClaimInfo, coverage_csv: str
-    ) -> None:
+    def test_expired_coverage(self, expired_policy_claim: ClaimInfo, coverage_csv: str) -> None:
         is_valid, reason = validate_claim(expired_policy_claim, coverage_csv)
         assert is_valid is False
         assert "outside" in reason.lower() or "coverage period" in reason.lower()
 
     # ── 4. Valid policy passes ──────────────────────────────────────────
 
-    def test_valid_claim_passes(
-        self, valid_claim: ClaimInfo, coverage_csv: str
-    ) -> None:
+    def test_valid_claim_passes(self, valid_claim: ClaimInfo, coverage_csv: str) -> None:
         is_valid, reason = validate_claim(valid_claim, coverage_csv)
         assert is_valid is True
         assert reason == "valid"

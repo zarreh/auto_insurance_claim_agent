@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import BaseModel, Field
 
 
@@ -21,15 +19,13 @@ class PolicyQueries(BaseModel):
 class PolicyRecommendation(BaseModel):
     """LLM-generated coverage recommendation based on claim + policy text."""
 
-    policy_section: str = Field(
-        ..., description="The policy section that applies to this claim"
-    )
+    policy_section: str = Field(..., description="The policy section that applies to this claim")
     recommendation_summary: str = Field(
         ..., description="Human-readable summary of the coverage recommendation"
     )
-    deductible: Optional[float] = Field(
+    deductible: float | None = Field(
         default=None, ge=0, description="Applicable deductible amount in USD"
     )
-    settlement_amount: Optional[float] = Field(
+    settlement_amount: float | None = Field(
         default=None, ge=0, description="Recommended settlement / payout amount in USD"
     )
