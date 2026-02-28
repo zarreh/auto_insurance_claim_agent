@@ -89,7 +89,7 @@ Multi-stage Docker builds with **docker-compose** orchestration, health checks, 
 
 ```bash
 # Clone and install
-git clone https://github.com/zarreh/claim_process_agent.git
+git clone https://github.com/zarreh/auto_insurance_claim_agent.git
 cd claim_process_agent
 make install
 

@@ -6,7 +6,7 @@ Development guide for the Claim Processing Agent.
 
 ```bash
 # Clone and install (including dev dependencies)
-git clone https://github.com/zarreh/claim_process_agent.git
+git clone https://github.com/zarreh/auto_insurance_claim_agent.git
 cd claim_process_agent
 poetry install
 

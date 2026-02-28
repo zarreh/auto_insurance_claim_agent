@@ -42,7 +42,7 @@ A **production-grade Agentic RAG (Retrieval-Augmented Generation)** system that 
 ### Installation
 
 ```bash
-git clone https://github.com/zarreh/claim_process_agent.git
+git clone https://github.com/zarreh/auto_insurance_claim_agent.git
 cd claim_process_agent
 make install
 
@@ -90,7 +90,7 @@ python -m claim_agent.main pipeline=langchain
 python -m claim_agent.main pipeline=smolagents
 ```
 
-See the [Configuration Guide](https://zarreh.github.io/claim_process_agent/getting-started/configuration/) for full details.
+See the [Configuration Guide](https://zarreh.github.io/auto_insurance_claim_agent/getting-started/configuration/) for full details.
 
 ## 🧪 Testing
 
@@ -101,7 +101,7 @@ make test
 
 ## 📖 Documentation
 
-Full documentation is available at: **[https://zarreh.github.io/claim_process_agent/](https://zarreh.github.io/claim_process_agent/)**
+Full documentation is available at: **[https://zarreh.github.io/auto_insurance_claim_agent/](https://zarreh.github.io/auto_insurance_claim_agent/)**
 
 Or serve locally:
 

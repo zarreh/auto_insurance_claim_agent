@@ -15,7 +15,7 @@ Get the Claim Processing Agent running locally in under 5 minutes.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/zarreh/claim_process_agent.git
+git clone https://github.com/zarreh/auto_insurance_claim_agent.git
 cd claim_process_agent
 ```
 
