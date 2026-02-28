@@ -27,12 +27,15 @@ class LangChainPipeline(BasePipeline):
         super().__init__(cfg)
 
         # ── Initialise LLM ──────────────────────────────────────────────
-        self.llm = ChatOpenAI(
-            model=cfg.llm.model,
-            temperature=cfg.llm.temperature,
-            max_tokens=cfg.llm.max_tokens,
-            api_key=cfg.llm.api_key,
-        )
+        llm_kwargs: dict[str, Any] = {
+            "model": cfg.llm.model,
+            "temperature": cfg.llm.temperature,
+            "max_tokens": cfg.llm.max_tokens,
+            "api_key": cfg.llm.api_key,
+        }
+        if cfg.llm.get("base_url"):
+            llm_kwargs["base_url"] = cfg.llm.base_url
+        self.llm = ChatOpenAI(**llm_kwargs)
         logger.info(
             "LLM initialised: model={model}, temp={temp}",
             model=cfg.llm.model,

@@ -73,6 +73,7 @@ def generate_policy_queries(
         A JSON string with key 'queries' containing a list of search query strings.
     """
     import json as _json
+    import os as _os
 
     from langchain_openai import ChatOpenAI
 
@@ -81,7 +82,10 @@ def generate_policy_queries(
     from claim_agent.schemas.policy import PolicyQueries
 
     claim = ClaimInfo(**_json.loads(claim_json))
-    llm = ChatOpenAI(model=model_name, temperature=temperature, api_key=api_key)
+    llm_kwargs: dict = {"model": model_name, "temperature": temperature, "api_key": api_key}
+    if _os.environ.get("OPENAI_BASE_URL"):
+        llm_kwargs["base_url"] = _os.environ["OPENAI_BASE_URL"]
+    llm = ChatOpenAI(**llm_kwargs)
     chain = QUERY_GENERATION_PROMPT | llm.with_structured_output(PolicyQueries)
     result: PolicyQueries = chain.invoke(
         {
@@ -267,6 +271,7 @@ def generate_recommendation(
             'recommendation_summary', 'deductible', and 'settlement_amount'.
     """
     import json as _json
+    import os as _os
 
     from langchain_openai import ChatOpenAI
 
@@ -275,7 +280,10 @@ def generate_recommendation(
     from claim_agent.schemas.policy import PolicyRecommendation
 
     claim = ClaimInfo(**_json.loads(claim_json))
-    llm = ChatOpenAI(model=model_name, temperature=temperature, api_key=api_key)
+    llm_kwargs: dict = {"model": model_name, "temperature": temperature, "api_key": api_key}
+    if _os.environ.get("OPENAI_BASE_URL"):
+        llm_kwargs["base_url"] = _os.environ["OPENAI_BASE_URL"]
+    llm = ChatOpenAI(**llm_kwargs)
     chain = RECOMMENDATION_PROMPT | llm.with_structured_output(PolicyRecommendation)
     result: PolicyRecommendation = chain.invoke(
         {

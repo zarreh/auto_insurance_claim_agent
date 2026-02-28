@@ -41,10 +41,13 @@ class SmolAgentsPipeline(BasePipeline):
         super().__init__(cfg)
 
         # ── Model ────────────────────────────────────────────────────────
-        self.model = OpenAIServerModel(
-            model_id=cfg.llm.model,
-            api_key=cfg.llm.api_key,
-        )
+        model_kwargs: dict[str, Any] = {
+            "model_id": cfg.llm.model,
+            "api_key": cfg.llm.api_key,
+        }
+        if cfg.llm.get("base_url"):
+            model_kwargs["api_base"] = cfg.llm.base_url
+        self.model = OpenAIServerModel(**model_kwargs)
         logger.info(
             "Smolagents model initialised: {model}",
             model=cfg.llm.model,

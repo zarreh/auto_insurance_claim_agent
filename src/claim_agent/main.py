@@ -13,10 +13,14 @@ from __future__ import annotations
 
 import hydra
 import uvicorn
+from dotenv import load_dotenv
 from loguru import logger
 from omegaconf import DictConfig
 
 from claim_agent.api.app import create_app
+
+# Load .env BEFORE Hydra resolves ${oc.env:...} references
+load_dotenv()
 
 
 @hydra.main(version_base=None, config_path="../../conf", config_name="config")
