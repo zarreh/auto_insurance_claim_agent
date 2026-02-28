@@ -1,0 +1,3 @@
+level: INFO
+colored: true
+format: structured  # "structured" for JSON (prod), "pretty" for colored console (dev)

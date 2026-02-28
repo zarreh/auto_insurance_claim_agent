@@ -1,0 +1,5 @@
+collection_name: policy_chunks
+embedding_model: all-MiniLM-L6-v2
+n_results: 5
+chunk_size: 500
+chunk_overlap: 50

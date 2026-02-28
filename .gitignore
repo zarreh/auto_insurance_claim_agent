@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# ChromaDB persistence (generated)
+data/chroma_db/
+
+# Environment variables
+.env
+
+# Poetry (optional — keep lock out of VCS for flexibility)
+# poetry.lock
+
+# Type checking / linting caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Jupyter notebooks (exploratory, not production)
+notebook/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

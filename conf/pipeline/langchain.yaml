@@ -1,0 +1,10 @@
+type: langchain
+
+# LangGraph-specific settings
+graph:
+  max_iterations: 10
+  recursion_limit: 25
+
+# Price-check thresholds
+price_check:
+  inflation_threshold: 0.40  # flag if claimed cost > 40% above market estimate

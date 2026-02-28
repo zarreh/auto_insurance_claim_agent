@@ -1,0 +1,11 @@
+defaults:
+  - pipeline: langchain
+  - llm: openai
+  - vectordb: chroma
+  - logging: default
+  - server: default
+
+data:
+  coverage_csv: data/coverage_data.csv
+  policy_pdf: data/policy.pdf
+  chroma_persist_dir: data/chroma_db

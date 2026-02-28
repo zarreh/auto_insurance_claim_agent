@@ -1,0 +1,10 @@
+type: smolagents
+
+# Agent-specific settings
+agent:
+  max_steps: 10
+  verbosity_level: 1
+
+# Price-check thresholds
+price_check:
+  inflation_threshold: 0.40

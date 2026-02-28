@@ -1,0 +1,1 @@
+"""Smolagents pipeline implementation."""
