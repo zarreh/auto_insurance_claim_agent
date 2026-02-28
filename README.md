@@ -90,7 +90,7 @@ python -m claim_agent.main pipeline=langchain
 python -m claim_agent.main pipeline=smolagents
 ```
 
-See the [Configuration Guide](https://zarreh.github.io/auto_insurance_claim_agent/getting-started/configuration/) for full details.
+See the [Configuration Guide](https://claim-agent-docs.zarreh.ai/getting-started/configuration/) for full details.
 
 ## 🧪 Testing
 
@@ -101,7 +101,7 @@ make test
 
 ## 📖 Documentation
 
-Full documentation is available at: **[https://zarreh.github.io/auto_insurance_claim_agent/](https://zarreh.github.io/auto_insurance_claim_agent/)**
+Full documentation is available at: **[https://claim-agent-docs.zarreh.ai/](https://claim-agent-docs.zarreh.ai/)**
 
 Or serve locally:
 

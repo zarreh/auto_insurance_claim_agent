@@ -1,7 +1,7 @@
 site_name: Claim Processing Agent
 site_description: Agentic RAG Insurance Claim Processing System — Technical Documentation
 site_author: Alireza Zarreh
-site_url: https://zarreh.github.io/auto_insurance_claim_agent/
+site_url: https://claim-agent-docs.zarreh.ai/
 
 repo_name: auto_insurance_claim_agent
 repo_url: https://github.com/zarreh/auto_insurance_claim_agent
