@@ -14,8 +14,10 @@ run-frontend:
 	cd frontend && poetry run streamlit run app.py --server.port=8501 --server.address=0.0.0.0
 
 run:
-	$(MAKE) run-api &
-	$(MAKE) run-frontend
+	poetry run python -m claim_agent.main &
+	sleep 2
+	cd frontend && poetry run streamlit run app.py --server.port=8501 --server.address=0.0.0.0; \
+	kill %1 2>/dev/null || true
 
 # ─── Docker ─────────────────────────────────────────────────────────────────────
 
