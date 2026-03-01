@@ -104,7 +104,9 @@ make ingest
 make run
 ```
 
-Then open [http://localhost:8501](http://localhost:8501) in your browser.
+Then open [http://localhost:8504](http://localhost:8504) in your browser.
+
+Or visit the live deployment at **[https://claim-agent.zarreh.ai](https://claim-agent.zarreh.ai)**.
 
 → See the full [Quick Start Guide](getting-started/quickstart.md) for details.
 

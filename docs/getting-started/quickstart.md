@@ -2,6 +2,14 @@
 
 Get the Claim Processing Agent running locally in under 5 minutes.
 
+## Live Demo
+
+| Service | URL |
+|---|---|
+| **App (Streamlit UI)** | https://claim-agent.zarreh.ai |
+| **API docs** | http://claim-agent.zarreh.ai:8000/docs |
+| **Documentation** | https://claim-agent-docs.zarreh.ai |
+
 ## Prerequisites
 
 | Requirement | Version |

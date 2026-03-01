@@ -33,6 +33,13 @@ A **production-grade Agentic RAG (Retrieval-Augmented Generation)** system that 
 
 ## 🚀 Quick Start
 
+### Live Demo
+
+| Service | URL |
+|---|---|
+| **App (Streamlit UI)** | https://claim-agent.zarreh.ai |
+| **Documentation** | https://claim-agent-docs.zarreh.ai |
+
 ### Prerequisites
 
 - Python 3.12+
@@ -59,7 +66,7 @@ make run
 
 # Or start individually
 make run-api       # FastAPI on :8000
-make run-frontend  # Streamlit on :8501
+make run-frontend  # Streamlit on :8504
 ```
 
 ### Run with Docker

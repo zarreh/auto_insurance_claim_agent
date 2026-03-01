@@ -23,6 +23,60 @@ curl http://localhost:8000/api/v1/health
 
 Open [http://localhost:8501](http://localhost:8501) to access the Streamlit UI.
 
+## Production URLs
+
+When deployed with a reverse proxy in front of Docker:
+
+| Service | URL |
+|---|---|
+| Streamlit UI | https://claim-agent.zarreh.ai |
+| FastAPI docs | http://claim-agent.zarreh.ai:8000/docs |
+| Documentation | https://claim-agent-docs.zarreh.ai |
+
+## Custom Domain Setup
+
+To serve the app at `claim-agent.zarreh.ai`, configure DNS and a reverse proxy:
+
+### 1. DNS Record
+
+Add an A record (or CNAME) pointing `claim-agent.zarreh.ai` to your server IP.
+
+### 2. Reverse Proxy (nginx example)
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name claim-agent.zarreh.ai;
+
+    ssl_certificate     /etc/letsencrypt/live/claim-agent.zarreh.ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/claim-agent.zarreh.ai/privkey.pem;
+
+    location / {
+        proxy_pass         http://localhost:8504;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection "upgrade";
+        proxy_set_header   Host $host;
+    }
+}
+```
+
+Or with **Caddy** (auto-HTTPS):
+
+```caddyfile
+claim-agent.zarreh.ai {
+    reverse_proxy localhost:8504
+}
+```
+
+### 3. SSL Certificate
+
+```bash
+certbot --nginx -d claim-agent.zarreh.ai
+```
+
+> **Note**: Streamlit makes backend calls server-side inside Docker over the internal `backend:8000` network, so `API_BASE_URL` in `docker-compose.yml` does not need to change.
+
 ## Architecture
 
 ```mermaid
