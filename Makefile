@@ -11,7 +11,7 @@ run-api:
 	poetry run python -m claim_agent.main
 
 run-frontend:
-	cd frontend && poetry run streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+	cd frontend && poetry run streamlit run app.py --server.port=8504 --server.address=0.0.0.0
 
 run:
 	poetry run python -m claim_agent.main &
