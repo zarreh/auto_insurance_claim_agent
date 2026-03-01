@@ -9,14 +9,8 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock* ./
 
 # Install production dependencies only (no dev group, no project itself yet)
-# Then force-reinstall torch with the CPU-only wheel to avoid pulling the
-# multi-GB CUDA build that sentence-transformers and smolagents would otherwise
-# bring in (saves ~8-10 GB in the final image).
 RUN poetry config virtualenvs.in-project true && \
-    poetry install --no-interaction --no-ansi --without dev --no-root && \
-    .venv/bin/pip install --no-cache-dir --force-reinstall \
-        torch torchvision torchaudio \
-        --index-url https://download.pytorch.org/whl/cpu
+    poetry install --no-interaction --no-ansi --without dev --no-root
 
 # ── Stage 2: Runtime ─────────────────────────────────────────────────
 FROM python:3.12-slim AS runtime

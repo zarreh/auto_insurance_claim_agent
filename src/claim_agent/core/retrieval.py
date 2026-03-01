@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import chromadb
 from loguru import logger
-from sentence_transformers import SentenceTransformer
+from openai import OpenAI
 
 
 def retrieve_policy_text(
@@ -27,7 +28,7 @@ def retrieve_policy_text(
     collection_name:
         Name of the ChromaDB collection to query.
     embedding_model:
-        HuggingFace model identifier for ``sentence-transformers``.
+        OpenAI embedding model identifier (e.g. ``text-embedding-3-small``).
     n_results:
         Maximum number of results to return **per query**.
 
@@ -70,9 +71,13 @@ def retrieve_policy_text(
         q=len(queries),
     )
 
-    # ── Embed queries ───────────────────────────────────────────────────
-    model = SentenceTransformer(embedding_model)
-    query_embeddings = model.encode(queries).tolist()
+    # ── Embed queries via OpenAI ─────────────────────────────────────
+    _client = OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+        base_url=os.environ.get("OPENAI_BASE_URL") or None,
+    )
+    response = _client.embeddings.create(input=queries, model=embedding_model)
+    query_embeddings = [item.embedding for item in response.data]
 
     # ── Retrieve from ChromaDB ──────────────────────────────────────────
     results = collection.query(

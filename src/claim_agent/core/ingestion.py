@@ -7,12 +7,13 @@ Can be run standalone via ``python -m claim_agent.core.ingestion`` (used by
 from __future__ import annotations
 
 import hashlib
+import os
 from pathlib import Path
 
 import chromadb
 from loguru import logger
+from openai import OpenAI
 from PyPDF2 import PdfReader
-from sentence_transformers import SentenceTransformer
 
 # ---------------------------------------------------------------------------
 # Public API
@@ -41,7 +42,7 @@ def ingest_policy_pdf(
     collection_name:
         Name of the ChromaDB collection.
     embedding_model:
-        HuggingFace model identifier for ``sentence-transformers``.
+        OpenAI embedding model identifier (e.g. ``text-embedding-3-small``).
     chunk_size:
         Maximum number of characters per chunk.
     chunk_overlap:
@@ -84,10 +85,14 @@ def ingest_policy_pdf(
         ov=chunk_overlap,
     )
 
-    # ── Embed chunks ────────────────────────────────────────────────────
-    logger.info("Loading embedding model: {model}", model=embedding_model)
-    model = SentenceTransformer(embedding_model)
-    embeddings = model.encode(chunks, show_progress_bar=True).tolist()
+    # ── Embed chunks via OpenAI ─────────────────────────────────────
+    logger.info("Embedding {n} chunks with model: {model}", n=len(chunks), model=embedding_model)
+    _client = OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+        base_url=os.environ.get("OPENAI_BASE_URL") or None,
+    )
+    response = _client.embeddings.create(input=chunks, model=embedding_model)
+    embeddings = [item.embedding for item in response.data]
 
     # ── Store in ChromaDB ───────────────────────────────────────────────
     ids = [_chunk_id(i, chunk) for i, chunk in enumerate(chunks)]

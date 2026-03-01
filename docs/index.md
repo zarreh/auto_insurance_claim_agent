@@ -43,7 +43,7 @@ Switch between **LangChain/LangGraph** (deterministic graph) and **Smolagents** 
 
 <div class="tech-card" markdown>
 #### 📄 RAG-Powered
-Semantic search over insurance policy PDFs using **ChromaDB** and **sentence-transformers** embeddings.
+Semantic search over insurance policy PDFs using **ChromaDB** and **OpenAI embeddings** (`text-embedding-3-small`).
 </div>
 
 <div class="tech-card" markdown>

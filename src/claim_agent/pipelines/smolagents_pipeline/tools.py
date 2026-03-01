@@ -119,7 +119,7 @@ def retrieve_policy_text(
         queries_json: A JSON string with key 'queries' — a list of search query strings.
         chroma_persist_dir: Directory where ChromaDB data is persisted.
         collection_name: Name of the ChromaDB collection to query.
-        embedding_model: HuggingFace model identifier for sentence-transformers.
+        embedding_model: OpenAI embedding model identifier (e.g. text-embedding-3-small).
         n_results: Maximum number of results to return per query.
 
     Returns:

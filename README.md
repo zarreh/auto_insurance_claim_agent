@@ -11,7 +11,7 @@ A **production-grade Agentic RAG (Retrieval-Augmented Generation)** system that 
 ## ✨ Key Features
 
 - **Dual Agentic Pipelines** — LangChain/LangGraph (stateful graph) and Smolagents (autonomous agent), interchangeable via config
-- **Agentic RAG** — Semantic retrieval from policy documents using ChromaDB + sentence-transformers
+- **Agentic RAG** — Semantic retrieval from policy documents using ChromaDB + OpenAI embeddings
 - **Automated Validation** — Policy existence, premium status, coverage dates, and cost inflation checks
 - **REST API** — FastAPI backend with structured request/response schemas
 - **Streamlit UI** — Polished frontend with claim form, results dashboard, and reasoning trace viewer
@@ -141,7 +141,7 @@ make docs-serve
 | LLM | OpenAI GPT-4o |
 | Agent Frameworks | LangChain/LangGraph, Smolagents |
 | Vector Store | ChromaDB |
-| Embeddings | sentence-transformers (all-MiniLM-L6-v2) |
+| Embeddings | OpenAI (text-embedding-3-small) |
 | Backend | FastAPI + Uvicorn |
 | Frontend | Streamlit |
 | Configuration | Hydra |
