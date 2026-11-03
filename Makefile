@@ -1,4 +1,4 @@
-.PHONY: install run-api run-frontend run docker-build docker-up docker-down test lint format clean ingest docs-serve docs-build
+.PHONY: install run-api run-frontend run docker-build docker-up docker-down ssl-init ssl-renew nginx-enable test lint format clean ingest docs-serve docs-build
 
 # ─── Dependencies ───────────────────────────────────────────────────────────────
 
@@ -29,6 +29,25 @@ docker-up:
 
 docker-down:
 	docker compose down
+
+# ─── SSL / Domain (claim-agent.zarreh.ai) ───────────────────────────────────────
+
+# Obtain certificate via host certbot (host nginx owns ports 80/443).
+# Prerequisites: DNS A record for claim-agent.zarreh.ai → this server's IP,
+#                host nginx site enabled (make nginx-enable).
+ssl-init:
+	certbot --nginx -d claim-agent.zarreh.ai --non-interactive --agree-tos -m admin@zarreh.ai
+
+# Force-renew the certificate immediately.
+ssl-renew:
+	certbot renew --force-renewal
+	nginx -s reload
+
+# Install and enable the host nginx site config.
+nginx-enable:
+	cp nginx/claim-agent.nginx.conf /etc/nginx/sites-available/claim-agent
+	ln -sf /etc/nginx/sites-available/claim-agent /etc/nginx/sites-enabled/claim-agent
+	nginx -t && nginx -s reload
 
 # ─── Data Ingestion ─────────────────────────────────────────────────────────────
 
